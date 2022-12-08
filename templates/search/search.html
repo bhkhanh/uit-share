@@ -1,0 +1,84 @@
+{% extends 'base.html' %} {% load static %} {% load class_name %}
+<!-- main -->
+{% block main %}
+<main>
+	<div class="card rounded-0 border-0" style="height: 250px">
+		{% with background_img="images/image-03.jpg" %}
+		<div class="card-img bg-img-for-custom-col rounded-0 shadow" style="background-image: url('{% static background_img %}')"></div>
+		{% endwith %}
+		<div class="card-img-overlay">
+			<div class="container mt-3">
+				<div class="rounded-2 px-5 pt-4 pb-5 shadow" style="background: rgba(0, 0, 0, 0.45)">
+					<div class="fw-semibold fs-3 ps-2 mb-0">
+						<a href="{% url 'search-page' %}" class="text-decoration-none hover-1">Search</a>
+					</div>
+					<form method="get" class="row gx-2" id="search-form" action="{% url 'search-page' %}">
+						<div class="col-11 d-grid">{% include 'includes/search-input.html' %}</div>
+						<div class="col-1 d-grid">
+							<button class="btn btn-primary btn-lg box-shadow-2" type="submit">
+								<i class="fa-solid fa-magnifying-glass"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container mt-2 ps-4">
+		{% if search_result_list %}
+		<span class="fs-4">Search results for "{{ query_string }}" ({{ count }})</span>
+		<div class="row row-cols-4 g-4 mt-0">
+			{% for result in search_result_list %}
+			<!---->
+			{% with result|class_name as klass %}
+			<!---->
+			{% if klass == "Course" %}
+			<div class="col custom-col" style="height: 200px">
+				<a href="{{ result.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none shadow-4">
+					<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ result.thumbnail_img.url }}'); opacity: 0.9;"></div>
+					<div class="overlay">Course</div>
+					<div class="card-img-overlay d-flex flex-wrap">
+						<div class="card-title fs-6 m-auto text-primary rounded-2 p-2" style="background-color: #e3f2fd">{{ result.name }}</div>
+					</div>
+				</a>
+			</div>
+			{% endif %}
+			<!--  -->
+			{% if klass == "File" %}
+			<div class="col custom-col" style="height: 200px">
+				<a href="{{ result.course_id.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none shadow-4">
+					<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ result.course_id.thumbnail_img.url }}'); opacity: 0.9;"></div>
+
+					<div class="card-img-overlay d-flex flex-wrap">
+						<div class="card-title fs-6 m-auto text-primary rounded-2 p-2" style="background-color: #e3f2fd">{{ result.course_id.name }}</div>
+					</div>
+				</a>
+			</div>
+			{% endif %}
+			<!--  -->
+			{% endwith %} {% endfor %}
+		</div>
+		<div class="row row-cols-3 mt-2 g-3">
+			{% for result in search_result_list %}
+			<!--  -->
+			{% with result|class_name as klass %} {% if klass == "Category" %}
+			<div class="col custom-col" style="height: 140px">
+				<a href="{{ result.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none shadow-4">
+					<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ result.thumbnail_img.url }}'); opacity: 0.9;"></div>
+					<div class="overlay">Category</div>
+					<div class="card-img-overlay d-flex flex-wrap">
+						<div class="card-title fs-5 my-auto ms-3 rounded-4 py-2 px-3 text-light" style="background-color: rgba(0, 0, 0, 0.5)">{{ result.name }}</div>
+					</div>
+				</a>
+			</div>
+			{% endif %} {% endwith %} {% endfor %}
+		</div>
+		{% else %}
+		<!---->
+		{% if query_string != None %}
+		<span class="fs-4">There is no results for <em>"{{ query_string }}"</em></span>
+		{% endif %} {% endif %}
+	</div>
+</main>
+{% endblock main %}

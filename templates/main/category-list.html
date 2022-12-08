@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+<!-- main -->
+{% block main %}
+<main class="container">
+	<div class="my-3">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-0 bg-light custom-breadcrumb-section box-shadow-3">
+				<li class="breadcrumb-item">
+					<a href="{% url 'home-page' %}">
+						<i class="fa-solid fa-house"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Category</li>
+			</ol>
+		</nav>
+	</div>
+	<div class="mb-5">
+		<div class="fs-2 text-center fw-semibold text-primary">List of Categories</div>
+		<div class="row row-cols-3 mt-1 g-4">
+			{% for category in category_list %}
+			<div class="col custom-col" style="height: 155px">
+				<a href="{{ category.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none box-shadow-4">
+					<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ category.thumbnail_img.url }}');">
+						<div class="card-img-overlay d-flex flex-wrap">
+							<div class="card-title fs-5 my-auto ms-2 rounded-4 p-2 text-light" style="background: rgba(0, 0, 0, 0.5)">{{ category.name }}</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</main>
+{% endblock main %}

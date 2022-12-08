@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+<!-- main -->
+{% block main %}
+<main class="container">
+	<div class="fs-2 fw-semibold text-black-50 mt-3">Logged Out</div>
+	<p>Thanks for spending some quality time with the web site today.</p>
+	<div>
+		<p>
+			Do you want to log in again?
+			<a href="{% url 'login-page' %}" class="text-decoration-none ms-2">
+				<i class="fa-regular fa-hand-point-right"></i>
+				Login
+			</a>
+		</p>
+	</div>
+</main>
+{% endblock main %}

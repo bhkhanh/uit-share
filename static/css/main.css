@@ -1,0 +1,165 @@
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	min-height: 100vh;
+}
+
+.breadcrumb a {
+	text-decoration: none;
+}
+
+.required label:after {
+	content: "*";
+	color: red;
+}
+
+/* ----- box shadow styles ----- */
+.box-shadow-1 {
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.box-shadow-2 {
+	box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.box-shadow-3 {
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.box-shadow-4 {
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+.box-shadow-5 {
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+/* ---------------------------------------- */
+
+/* ----- forms styles ----- */
+.form-style-1 {
+	width: 550px;
+	padding: 3rem 3.4rem;
+	border-radius: 0.5rem;
+}
+/* ---------------------------------------- */
+
+/* ----- hover styles ----- */
+.hover-1 {
+	box-shadow: inset 0 0 0 0 #0d6efd;
+	color: #0d6efd;
+	margin: 0 -0.25rem;
+	padding: 0 0.25rem;
+	transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.hover-1:hover {
+	box-shadow: inset 1000px 0 0 0 #0d6efd;
+	color: #ffffff;
+}
+
+.hover-2 {
+	box-shadow: inset 0 0 0 0 #000;
+	color: #000;
+	margin: 0 -0.25rem;
+	padding: 0 0.25rem;
+	transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.hover-2:hover {
+	box-shadow: inset 1000px 0 0 0 #000;
+	color: #0d6efd;
+}
+/* ---------------------------------------- */
+
+/* ----- making background dark when focusing on search input ----- */
+.darken-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: none;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+#search-input:focus {
+	position: relative;
+	z-index: 2;
+}
+
+#search-input:focus ~ .darken-bg {
+	display: block;
+	z-index: 1;
+}
+
+#search-input:focus ~ label {
+	z-index: 2;
+}
+/* ---------------------------------------- */
+
+/* ----- custom breadcrumb styles ----- */
+.custom-breadcrumb-section {
+	padding: 0.7rem 1.2rem;
+	border-radius: 0.35rem;
+}
+
+.custom-breadcrumb-section a {
+	text-decoration: none;
+}
+/* ---------------------------------------- */
+
+/* ----- custom col styles ----- */
+.custom-col {
+	cursor: pointer;
+	font-weight: 300;
+	min-height: 100%;
+}
+
+.custom-col:hover {
+	transform: scale(1.04);
+	font-weight: 500;
+}
+/* ---------------------------------------- */
+
+/* ----- error styles ----- */
+.error-template {
+	padding: 40px 15px;
+	text-align: center;
+}
+.error-actions {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.error-actions .btn {
+	margin-right: 10px;
+}
+/* ---------------------------------------- */
+
+/* for images */
+.bg-img-for-custom-col {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 100%;
+	width: 100%;
+	min-height: 100%;
+}
+/* ---------------------------------------- */
+
+.overlay {
+	position: absolute;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5); /* Black see-through */
+	width: 100%;
+	transition: 0.5s ease;
+	opacity: 0;
+	color: white;
+	font-size: 14px;
+	font-weight: 300;
+	padding: 10px;
+	text-align: center;
+}
+
+.card:hover .overlay {
+	opacity: 1;
+}

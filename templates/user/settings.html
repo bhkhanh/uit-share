@@ -1,0 +1,86 @@
+{% extends 'base.html' %} {% load widget_tweaks %}
+<!-- main -->
+{% block main %}
+<main class="container">
+	<div class="box-shadow-1 mb-5 mx-auto form-style-1" style="height: max-content; max-height: max-content; width: 70%; margin-top: 3rem">
+		<form class="row" method="post" enctype="multipart/form-data">
+			<div class="col-4 px-4 border-end">
+				<img src="{{ user.avatar_img.url }}" alt="User Avatar" class="img-fluid img-thumbnail shadow w-100" id="avatar-display" />
+				<div class="vstack gap-2 mt-4">
+					<input type="file" id="avatar-upload" name="avatar_img" accept="image/*" hidden />
+					<!-- {% render_field form.avatar_img %} -->
+					<label for="avatar-upload" class="btn btn-secondary box-shadow-3 w-100">Update photo</label>
+					<a href="{{ user_detail.get_absolute_url }}" class="btn btn-primary w-100 box-shadow-3">View Profile</a>
+					<a href="{% url 'password-change-page' %}" class="btn btn-primary w-100 box-shadow-3">Change password</a>
+				</div>
+			</div>
+			<div class="col-8 border-start">
+				<div class="ms-4">
+					<div class="mb-3">
+						<div class="fw-bold text-primary fs-3">Profile Settings</div>
+						<small class="text-muted fw-light">Update your photo and personal details</small>
+					</div>
+					{% if form.errors %}
+					<div class="d-flex alert alert-danger alert-dismissible fade show align-items-baseline" role="alert">
+						<i class="fa-solid fa-triangle-exclamation"></i>
+						<ul class="mb-0 ps-4">
+							{% for field in form %}
+							<!---->
+							{% for error in field.errors %}
+							<li>{{ error }}</li>
+							{% endfor %} {% endfor %}
+							<!---->
+							{% for error in form.non_field_errors %}
+							<li>{{ error }}</li>
+							{% endfor %}
+						</ul>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+					{% endif %}
+					<!---->
+					{% csrf_token %}
+					<div class="form-floating mb-3">
+						{% render_field form.name|add_class:"form-control bg-light rounded-3 ps-3 box-shadow-3"|attr:"placeholder:..."|remove_attr:"maxlength"|add_error_class:"is-invalid" %}
+						<label class="text-muted">
+							<i class="fa-solid fa-address-card me-1"></i>
+							Name
+						</label>
+					</div>
+					<div class="form-floating mb-3">
+						{% render_field form.username|add_class:"form-control bg-light rounded-3 ps-3 box-shadow-3"|attr:"placeholder:..."|remove_attr:"maxlength"|add_error_class:"is-invalid" %}
+						<label class="text-muted">
+							<i class="fa-solid fa-circle-user me-1"></i>
+							Username
+						</label>
+					</div>
+					<div class="form-floating mb-3">
+						{% render_field form.email|add_class:"form-control bg-light rounded-3 ps-3 box-shadow-3"|attr:"placeholder:..."|remove_attr:"maxlength"|add_error_class:"is-invalid" %}
+						<label class="text-muted">
+							<i class="fa-solid fa-at me-1"></i>
+							Email address
+						</label>
+					</div>
+					<div class="form-floating mb-3">
+						{% render_field form.bio|add_class:"form-control bg-light rounded-3 ps-3 box-shadow-3"|attr:"placeholder:..."|remove_attr:"maxlength"|add_error_class:"is-invalid"|attr:"style:height:120px;resize:none" %}
+						<label class="text-muted">
+							<i class="fa-regular fa-message me-1"></i>
+							Bio
+						</label>
+					</div>
+					<button class="btn btn-lg btn-primary rounded-3 box-shadow-3 w-100" type="submit">Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</main>
+{% endblock main %}
+<!---->
+{% block scripting %}
+<script>
+	$("#avatar-upload").change(function (e) {
+		e.preventDefault();
+		var img_upload = URL.createObjectURL(e.target.files[0]);
+		$("#avatar-display").attr("src", img_upload);
+	});
+</script>
+{% endblock scripting %}

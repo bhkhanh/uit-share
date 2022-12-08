@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+<!-- main -->
+{% block main %}
+<main class="container">
+	<div class="d-flex align-items-center justify-content-center" style="margin: 5rem 0">
+		<div class="text-center">
+			<h1 class="display-1 fw-bold">404</h1>
+			<p class="fs-3"><span class="text-danger">Opps!</span> Page not found.</p>
+			<!-- <p class="lead">The page you’re looking for doesn’t exist.</p> -->
+			<p class="lead">The requested resource was not found on this server.</p>
+			<a href="{% url 'home-page' %}" class="btn btn-primary">Go Home</a>
+		</div>
+	</div>
+</main>
+{% endblock main %}

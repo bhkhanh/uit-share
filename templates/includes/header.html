@@ -1,0 +1,108 @@
+{% load static %}
+<div class="bg-light border-bottom shadow-sm">
+	<div class="container">
+		<header class="d-flex align-items-center justify-content-between py-2" role="navigation">
+			<!-- start -->
+			<ul class="navbar-nav col-4">
+				<li class="nav-item">
+					<a href="{% url 'home-page' %}" class="d-inline-flex navbar-brand align-middle justify-content-center align-items-center text-primary">
+						<img class="me-2 my-auto" src="{% static 'images/logo.webp' %}" alt="UIT logo" width="34" height="32" />
+						<span class="fs-4 fw-bold">UIT Share</span>
+					</a>
+				</li>
+			</ul>
+			<!-- middle -->
+			<ul class="nav justify-content-center align-items-center col-4">
+				<li class="nav-item">
+					<a href="{% url 'home-page' %}" class="nav-link">Home</a>
+				</li>
+				<li class="nav-item">
+					<a href="{% url 'search-page' %}" class="nav-link">Search</a>
+				</li>
+				<li class="nav-item dropdown-center">
+					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" type="button" data-bs-auto-close="true" aria-expanded="false">Category</a>
+					<ul class="dropdown-menu">
+						{% for category in category_list %}
+						<li><a href="{{ category.get_absolute_url }}" class="dropdown-item">{{ category.name }}</a></li>
+						{% endfor %}
+						<li class="" style="background-color: #f0f1f3">
+							<a href="{% url 'category-list-page' %}" class="dropdown-item text-center">
+								See all
+								<i class="fa-solid fa-caret-down ms-1"></i>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a href="{% url 'about-page' %}" class="nav-link">About</a>
+				</li>
+			</ul>
+			<!-- end -->
+			{% if not user.is_authenticated %} {% if request.path == "/sign-up/" %}
+			<ul class="nav justify-content-end align-items-center col-4">
+				<li class="nav-item">
+					<a href="{% url 'login-page' %}" class="nav-link">
+						Log-in
+						<i class="fa-solid fa-arrow-right-to-bracket ms-1"></i>
+					</a>
+				</li>
+			</ul>
+			{% elif request.path == "/log-in/" %}
+			<ul class="nav justify-content-end align-items center col-4">
+				<li class="nav-item">
+					<a href="{% url 'signup-page' %}" class="nav-link">
+						Sign-up
+						<i class="fa-solid fa-user-plus ms-1"></i>
+					</a>
+				</li>
+			</ul>
+			{% else %}
+			<ol class="breadcrumb mb-0 justify-content-end align-items-center col-4">
+				<li class="breadcrumb-item">
+					<a href="{% url 'login-page' %}">
+						Log-in
+						<i class="fa-solid fa-arrow-right-to-bracket"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{% url 'signup-page' %}">
+						Sign-up
+						<i class="fa-solid fa-user-plus"></i>
+					</a>
+				</li>
+			</ol>
+			{% endif %} {% else %}
+			<ul class="nav justify-content-end align-items-center col-4">
+				<li class="nav-item">
+					{% now "H" as current_time %} {% if current_time|add:"0" >= 5 and current_time|add:"0" < 11 %} {% with greeting="Good morning, " %}
+					<span class="navbar-text px-1">{{ greeting }} <strong>{{ user.username }}</strong></span>
+					{% endwith %} {% elif current_time|add:"0" >= 11 and current_time|add:"0" < 16 %} {% with greeting="Good afternoon, " %}
+					<span class="navbar-text px-1">{{ greeting }} <strong>{{ user.username }}</strong></span>
+					{% endwith %} {% elif current_time|add:"0" >= 16 and current_time|add:"0" < 19 %} {% with greeting="Good evening, " %}
+					<span class="navbar-text px-1">{{ greeting }} <strong>{{ user.username }}</strong></span>
+					{% endwith %} {% else %} {% with greeting="Have a great night, " %}
+					<span class="navbar-text px-1" id="greeting-msg">{{ greeting }} <strong>{{ user.username }}</strong></span>
+					{% endwith %} {% endif %}
+				</li>
+				<li class="nav-item dropdown-center">
+					<a role="button" href="" class="dropdown-toggle nav-link px-1" data-bs-toggle="dropdown" aria-expanded="false">
+						<img src="{{ user.avatar_img.url }}" class="rounded-circle ms-1" alt="user avatar" width="30" height="30" style="vertical-align: middle" />
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="{{ user.get_absolute_url }}">Profile</a></li>
+						<li><a class="dropdown-item" href="{{ user.get_settings_url }}">Settings</a></li>
+						<li><a class="dropdown-item" href="{% url 'password-change-page' %}">Change password</a></li>
+						<li><hr class="dropdown-divider" /></li>
+						<li>
+							<form method="post" class="dropdown-item" action="{% url 'logout-page' %}">
+								{% csrf_token %}
+								<button class="btn" type="submit">Log out</button>
+							</form>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			{% endif %}
+		</header>
+	</div>
+</div>

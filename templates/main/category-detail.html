@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+<!-- main -->
+{% block main %}
+<main>
+	<div class="container my-3">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-0 bg-light custom-breadcrumb-section box-shadow-3">
+				<li class="breadcrumb-item">
+					<a href="{% url 'home-page' %}">
+						<i class="fa-solid fa-house"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{% url 'category-list-page' %}">Category</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">{{ category_detail.name }}</li>
+			</ol>
+		</nav>
+	</div>
+	<div class="container my-4">
+		<div class="box-shadow-3 bg-light" style="height: 595px; border-radius: 0.35rem; overflow: hidden scroll">
+			<div class="fs-2 fw-semibold text-primary text-center mt-2">{{ category_detail.name }}</div>
+			<div class="row row-cols-4 mt-0 mb-4 g-4 px-5">
+				{% for course in course_list %}
+				<div class="col custom-col" style="height: 200px">
+					<a href="{{ course.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none box-shadow-4">
+						<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ course.thumbnail_img.url }}')"></div>
+						<div class="card-img-overlay d-flex flex-wrap">
+							<div class="card-title fs-6 m-auto text-primary rounded-3 py-1 px-2" style="background-color: #e3f2fd">{{ course.name }}</div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock main %}
