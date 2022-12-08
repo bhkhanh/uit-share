@@ -196,8 +196,10 @@ SESSION_COOKIE_AGE = config("SESSION_COOKIE_AGE", cast=int)
 
 # for development
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = config("EMAIL_BACKEND")
-EMAIL_HOST = config("EMAIL_HOST")
+
+# for production
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = config("EMAIL_PORT", cast=int)
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
