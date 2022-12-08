@@ -24,7 +24,7 @@ class HomeView(TemplateView):
         "title": "UIT Share",
         "category_list": get_all_categories,
         "image_slides": get_image_slides,
-        "newest_course_list": get_newest_course_list(0, 16),
+        "newest_course_list": Course.objects.all().order_by("-date_modified")[0:16],
     }
 
 # ============================================================
