@@ -78,9 +78,6 @@ class Course(models.Model):
         }
         return reverse(viewname="course-detail-page", kwargs=context_arguments) # Result: www.example.com/course/<course_codename>/
 
-    def get_name_and_codename(val):
-        return val
-
     class Meta:
         db_table = "uit_share_course"   # Table name in database
         verbose_name_plural = "Courses" # Displaying this name in admin page
