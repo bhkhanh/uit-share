@@ -21,7 +21,7 @@ def get_image_slides():
 
 # Get latest/newest course list
 def get_newest_course_list(start_from, end_at):
-    return Course.objects.order_by("-date_modified")[start_from:end_at]
+    return Course.objects.all().order_by("-date_modified")[start_from:end_at]
 
 
 # Error handling for error code 400

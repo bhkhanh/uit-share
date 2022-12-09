@@ -62,51 +62,49 @@
 				</div>
 			</div>
 		</div>
-		{% if newest_course_list %}
 		<div class="carousel carousel-dark slide" id="carousel-newest-posts" data-bs-ride="true">
 			<div class="carousel-inner" style="overflow: visible">
-				{% with half_first_list=newest_course_list|slice:"0:8" %}
+				{% if course_list_first %}
 				<div class="carousel-item active bg-body" style="padding: 0 4rem">
 					<div class="row row-cols-4 g-4 pt-4">
-						{% for course in half_first_list %}
+						{% for course_1 in course_list_first %}
 						<div class="col custom-col" style="height: 200px">
-							<a href="{{ course.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none box-shadow-3">
-								<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ course.thumbnail_img.url }}'); opacity: 0.9"></div>
-								<div class="overlay">Updated {{ course.date_modified|timesince }} ago</div>
+							<a href="{{ course_1.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none box-shadow-3">
+								<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ course_2.thumbnail_img.url }}'); opacity: 0.9"></div>
+								<div class="overlay">Updated {{ course_1.date_modified|timesince }} ago</div>
 								<div class="card-img-overlay d-flex flex-wrap">
-									<div class="card-title fs-6 m-auto text-primary rounded-3 p-2" style="background-color: #e3f2fd">{{ course.name }}</div>
+									<div class="card-title fs-6 m-auto text-primary rounded-3 p-2" style="background-color: #e3f2fd">{{ course_1.name }}</div>
 								</div>
 							</a>
 						</div>
 						{% endfor %}
 					</div>
 				</div>
-				{% endwith %}
+				{% endif %}
 				<!---->
-				{% with half_second_list=newest_course_list|slice:"8:16" %}
+				{% if course_list_second %}
 				<div class="carousel-item bg-body" style="padding: 0 4rem">
 					<div class="row row-cols-4 g-4 pt-4">
-						{% for course in half_second_list %}
+						{% for course_2 in course_list_second %}
 						<div class="col custom-col" style="height: 200px">
-							<a href="{{ course.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none box-shadow-3">
-								<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ course.thumbnail_img.url }}'); opacity: 0.9"></div>
-								<div class="overlay">Updated {{ course.date_modified|timesince }} ago</div>
+							<a href="{{ course_2.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none box-shadow-3">
+								<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ course_2.thumbnail_img.url }}'); opacity: 0.9"></div>
+								<div class="overlay">Updated {{ course_2.date_modified|timesince }} ago</div>
 								<div class="card-img-overlay d-flex flex-wrap">
-									<div class="card-title fs-6 m-auto text-primary rounded-3 p-2" style="background-color: #e3f2fd">{{ course.name }}</div>
+									<div class="card-title fs-6 m-auto text-primary rounded-3 p-2" style="background-color: #e3f2fd">{{ course_2.name }}</div>
 								</div>
 							</a>
 						</div>
 						{% endfor %}
 					</div>
 				</div>
-				{% endwith %}
+				{% endif %}
 			</div>
 			<div class="carousel-indicators mt-2" style="position: static">
 				<button style="height: 6px" class="bg-primary active" type="button" data-bs-target="#carousel-newest-posts" data-bs-slide-to="0" aria-label="Slide 1" aria-current="true"></button>
 				<button style="height: 6px" class="bg-primary" type="button" data-bs-target="#carousel-newest-posts" data-bs-slide-to="1" aria-label="Slide 2"></button>
 			</div>
 		</div>
-		{% endif %}
 	</div>
 
 	<!-- Category List -->
