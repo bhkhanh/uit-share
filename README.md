@@ -12,3 +12,7 @@ This project is a document sharing website for UIT students *(or any University 
 Technologies that I used in the project are [**Django**](https://www.djangoproject.com/) *(version 4.1)*, [**PostgreSQL**](https://www.postgresql.org/), [**Bootstrap**](https://getbootstrap.com/) *(version 5.2.2)*, a little bit of [**jQuery**](https://jquery.com/), and [**AWS S3**](https://aws.amazon.com/s3/) for file storage.
 
 You can check file **requirements.txt** for dependencies of the project.
+
+<br>
+
+Click here to view the project: [**UIT Share**](https://uit-share.herokuapp.com/)
