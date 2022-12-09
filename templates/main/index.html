@@ -70,7 +70,7 @@
 						{% for course_1 in course_list_first %}
 						<div class="col custom-col" style="height: 200px">
 							<a href="{{ course_1.get_absolute_url }}" class="card h-100 mh-100 text-decoration-none box-shadow-3">
-								<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ course_2.thumbnail_img.url }}'); opacity: 0.9"></div>
+								<div class="card-img bg-img-for-custom-col" style="background-image: url('{{ course_1.thumbnail_img.url }}'); opacity: 0.9"></div>
 								<div class="overlay">Updated {{ course_1.date_modified|timesince }} ago</div>
 								<div class="card-img-overlay d-flex flex-wrap">
 									<div class="card-title fs-6 m-auto text-primary rounded-3 p-2" style="background-color: #e3f2fd">{{ course_1.name }}</div>
