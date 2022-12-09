@@ -99,7 +99,7 @@ TEMPLATES = [
 DATABASES = {
     "default": dj_database_url.config(
         default=config("DATABASE_URL"),
-        conn_max_age=600,
+        conn_max_age=0,
     ),
 }
 
@@ -170,7 +170,6 @@ AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME")
 AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
 
 MEDIA_ROOT = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
-# MEDIA_URL = "media/"
 
 
 # ============================================================
